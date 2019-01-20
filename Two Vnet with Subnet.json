@@ -1,0 +1,149 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+      "vnet1Name": {
+        "type": "string",
+        "defaultValue": "VNet1",
+        "metadata": {
+          "description": "VNet name"
+        }
+      },
+      "vnet1AddressPrefix": {
+        "type": "string",
+        "defaultValue": "10.0.0.0/16",
+        "metadata": {
+          "description": "Address prefix"
+        }
+      },
+      "vnet1subnet1Prefix": {
+        "type": "string",
+        "defaultValue": "10.0.0.0/24",
+        "metadata": {
+          "description": "Subnet 1 Prefix"
+        }
+      },
+      "vnet1subnet1Name": {
+        "type": "string",
+        "defaultValue": "Subnet1",
+        "metadata": {
+          "description": "Subnet 1 Name"
+        }
+      },
+      "vnet1subnet2Prefix": {
+        "type": "string",
+        "defaultValue": "10.0.1.0/24",
+        "metadata": {
+          "description": "Subnet 2 Prefix"
+        }
+      },
+      "vnet1subnet2Name": {
+        "type": "string",
+        "defaultValue": "Subnet2",
+        "metadata": {
+          "description": "Subnet 2 Name"
+        }
+      },
+      "vnet2Name": {
+        "type": "string",
+        "defaultValue": "VNet2",
+        "metadata": {
+          "description": "VNet name"
+        }
+      },
+      "vnet2AddressPrefix": {
+        "type": "string",
+        "defaultValue": "10.0.0.0/16",
+        "metadata": {
+          "description": "Address prefix"
+        }
+      },
+      "vnet2subnet1Prefix": {
+        "type": "string",
+        "defaultValue": "10.0.0.0/24",
+        "metadata": {
+          "description": "Subnet 1 Prefix"
+        }
+      },
+      "vnet2subnet1Name": {
+        "type": "string",
+        "defaultValue": "Subnet1",
+        "metadata": {
+          "description": "Subnet 1 Name"
+        }
+      },
+      "vnet2subnet2Prefix": {
+        "type": "string",
+        "defaultValue": "10.0.1.0/24",
+        "metadata": {
+          "description": "Subnet 2 Prefix"
+        }
+      },
+      "vnet2subnet2Name": {
+        "type": "string",
+        "defaultValue": "Subnet2",
+        "metadata": {
+          "description": "Subnet 2 Name"
+        }
+      }
+    },
+    "variables": {
+      "apiVersion": "2015-06-15"
+    },
+    "resources": [
+      {
+        "apiVersion": "[variables('apiVersion')]",
+        "type": "Microsoft.Network/virtualNetworks",
+        "name": "[parameters('vnet1Name')]",
+        "location": "[resourceGroup().location]",
+        "properties": {
+          "addressSpace": {
+            "addressPrefixes": [
+              "[parameters('vnet1AddressPrefix')]"
+            ]
+          },
+          "subnets": [
+            {
+              "name": "[parameters('vnet1subnet1Name')]",
+              "properties": {
+                "addressPrefix": "[parameters('vnet1subnet1Prefix')]"
+              }
+            },
+            {
+              "name": "[parameters('vnet1subnet2Name')]",
+              "properties": {
+                "addressPrefix": "[parameters('vnet1subnet2Prefix')]"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "apiVersion": "[variables('apiVersion')]",
+        "type": "Microsoft.Network/virtualNetworks",
+        "name": "[parameters('vnet2Name')]",
+        "location": "[resourceGroup().location]",
+        "properties": {
+          "addressSpace": {
+            "addressPrefixes": [
+              "[parameters('vnet2AddressPrefix')]"
+            ]
+          },
+          "subnets": [
+            {
+              "name": "[parameters('vnet2subnet1Name')]",
+              "properties": {
+                "addressPrefix": "[parameters('vnet2subnet1Prefix')]"
+              }
+            },
+            {
+              "name": "[parameters('vnet2subnet2Name')]",
+              "properties": {
+                "addressPrefix": "[parameters('vnet2subnet2Prefix')]"
+              }
+            }
+          ]
+        }
+      }
+    ]
+  }
